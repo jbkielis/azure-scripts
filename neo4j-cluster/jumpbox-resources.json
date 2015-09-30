@@ -263,7 +263,7 @@
         }
     }],
     "outputs": {
-        "jumpboxNIC": {
+        "jumpboxPublicIP": {
             "value": "[reference('jumpboxPublicIP')]",
             "type": "object"
         },
