@@ -238,7 +238,8 @@
                         ],
                         "volumes": [],
                         "environment": {
-                            "HOSTNAME": "[reference(resourceId('Microsoft.Network/publicIPAddresses', 'jumpboxPublicIP'),providers('Microsoft.Network', 'publicIPAddresses').apiVersions[0]).dnsSettings.fqdn]"
+                          // [reference(resourceId('Microsoft.Network/publicIPAddresses', 'jumpboxPublicIP'),providers('Microsoft.Network', 'publicIPAddresses').apiVersions[0]).dnsSettings.fqdn]
+                            "HOSTNAME": "1.2.3.4"
                         },
                     },
                     "synapse": {
