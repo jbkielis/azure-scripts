@@ -244,7 +244,7 @@
                     "synapse": {
                         "image": "jbkielis/docker-synapse",
                         "restart": "always",
-                        "command": "[concat('-d zk://', [reference(resourceId('Microsoft.Compute/virtualMachines', 'jumpboxVM')).IpAddress], ':2181/nerve -s neo4j:neo4j:/neo4j')]",
+                        "command": "[concat('-d zk://', '12', ':2181/nerve -s neo4j:neo4j:/neo4j')]",
                         "ports": [
                             "7474:7474",
                             "7473:7473",
@@ -261,9 +261,9 @@
         }
     }],
     "outputs": {
-        "ipaddress": {
-            "value": "[reference(resourceId('Microsoft.Compute/virtualMachines', 'jumpboxVM')).IpAddress]",
-            "type": "string"
+        "jumpboxNIC": {
+            "value": "[reference('jumpboxNIC')]",
+            "type": "object"
         }
     }
 }
