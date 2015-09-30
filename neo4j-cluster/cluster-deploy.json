@@ -14,7 +14,7 @@
                 "description": "Administrator password used when provisioning virtual machines"
             }
         },
-        "storageAccountName": {
+        "newStorageAccountName": {
             "type": "string",
             "metadata": {
                 "description": "Unique namespace for the Storage Account where the Virtual Machine's disks will be placed"
@@ -25,7 +25,7 @@
             "allowedValues": [
                 "West US",
                 "East US",
-                "East US 2"
+                "East US 2",
                 "East Asia",
                 "Southeast Asia",
                 "West Europe"
@@ -188,9 +188,9 @@
             "neo4jHeapSizeMb": "[variables('clusterSpec').neo4jHeapSizeMb]"
         },
         "storageSettings": {
-            "vhdStorageAccountName": "[parameters('storageAccountName')]",
+            "vhdStorageAccountName": "[parameters('newStorageAccountName')]",
             "vhdContainerName": "[variables('vmStorageAccountContainerName')]",
-            "destinationVhdsContainer": "[concat('https://', parameters('storageAccountName'), variables('vmStorageAccountDomain'), '/', variables('vmStorageAccountContainerName'), '/')]"
+            "destinationVhdsContainer": "[concat('https://', parameters('newStorageAccountName'), variables('vmStorageAccountDomain'), '/', variables('vmStorageAccountContainerName'), '/')]"
         },
         "networkSettings": {
             "virtualNetworkName": "[parameters('virtualNetworkName')]",
@@ -298,9 +298,7 @@
                         "machineNamePrefix": "[variables('machineSettings').machineNamePrefix]",
                         "osImageReference": "[variables('machineSettings').osImageReference]",
                         "vmSize": "[variables('clusterSpec').vmSizeMember]",
-                        "machineIndex": "[copyindex()]",
-                        "vmScripts": "[variables('vmScripts').scriptsToDownload]",
-                        "commandToExecute": "[concat(variables('vmScripts').installCommand, ' -i ', copyindex())]"
+                        "machineIndex": "[copyindex()]"
                     }
                 },
                 "adminPassword": {
