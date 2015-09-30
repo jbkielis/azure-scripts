@@ -96,6 +96,7 @@
         "apiVersion": "2015-05-01-preview",
         "location": "[parameters('commonSettings').location]",
         "dependsOn": [
+            "[concat('Microsoft.Compute/virtualMachines/', 'vmMember', parameters('machineSettings').machineIndex)]"
         ],
         "properties": {
             "publisher": "Microsoft.Azure.Extensions",
