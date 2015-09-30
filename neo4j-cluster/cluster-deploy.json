@@ -133,13 +133,6 @@
             "metadata": {
                 "description": "Neo4j authorization password"
             }
-        },
-        "neo4jHeapSizeMb": {
-            "type": "int",
-            "defaultValue": 1024,
-            "metadata": {
-                "description": "Neo4J max heap size in MB"
-            }
         }
     },
     "variables": {
@@ -149,6 +142,7 @@
             "numberOfMasters": 3,
             "numberOfSlaves": 0,
             "totalMemberCount": 3,
+            "neo4jHeapSizeMb": 1024,
             "vmTemplate": "[concat(variables('templateBaseUrl'), 'node-resources.json')]"
         },
         "tshirtSizeMedium": {
@@ -156,6 +150,7 @@
             "numberOfMasters": 3,
             "numberOfSlaves": 3,
             "totalMemberCount": 6,
+            "neo4jHeapSizeMb": 1024,
             "vmTemplate": "[concat(variables('templateBaseUrl'), 'node-resources.json')]"
         },
         "tshirtSizeLarge": {
@@ -164,6 +159,7 @@
             "numberOfSlaves": 6,
             "totalMemberCount": 9,
             "arbiter": "Enabled",
+            "neo4jHeapSizeMb": 1024,
             "vmTemplate": "[concat(variables('templateBaseUrl'), 'node-resources.json')]"
         },
         "osFamilyUbuntu": {
@@ -189,7 +185,7 @@
             "dockerHubEmail": "[parameters('dockerHubEmail')]",
             "neo4jUsername": "[parameters('neo4jUsername')]",
             "neo4jPassword": "[parameters('neo4jPassword')]",
-            "neo4jHeapSizeMb": "[parameters('neo4jHeapSizeMb')]"
+            "neo4jHeapSizeMb": "[variables('clusterSpec').neo4jHeapSizeMb]"
         },
         "storageSettings": {
             "vhdStorageAccountName": "[parameters('storageAccountName')]",
