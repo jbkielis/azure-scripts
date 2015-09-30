@@ -211,7 +211,9 @@
         "apiVersion": "2015-05-01-preview",
         "location": "[parameters('commonSettings').location]",
         "dependsOn": [
-            "[concat('Microsoft.Compute/virtualMachines/', 'jumpboxVM')]"
+            "[concat('Microsoft.Compute/virtualMachines/', 'jumpboxVM')]",
+            "[concat('Microsoft.Network/networkInterfaces/', 'jumpboxNIC')]",
+            "[concat('Microsoft.Network/publicIPAddresses/', 'jumpboxPublicIP')]"
         ],
         "properties": {
             "publisher": "Microsoft.Azure.Extensions",
@@ -238,15 +240,15 @@
                         ],
                         "volumes": [],
                         "environment": {
-                          // [reference(resourceId('Microsoft.Network/publicIPAddresses', 'jumpboxPublicIP'),providers('Microsoft.Network', 'publicIPAddresses').apiVersions[0]).dnsSettings.fqdn]
-                            "HOSTNAME": "1.2.3.4"
+                          // 
+                            "HOSTNAME": "[reference(resourceId('Microsoft.Network/publicIPAddresses', 'jumpboxPublicIP'),providers('Microsoft.Network', 'publicIPAddresses').apiVersions[0]).dnsSettings.fqdn]"
                         },
                     },
                     "synapse": {
                         "image": "jbkielis/docker-synapse",
                         "restart": "always",
-                        //[reference('jumpboxNIC').ipConfigurations[0].properties.privateIPAddress]
-                        "command": "[concat('-d zk://', '1.1.1.1', ':2181/nerve -s neo4j:neo4j:/neo4j')]",
+                        //
+                        "command": "[concat('-d zk://', '[reference('jumpboxNIC').ipConfigurations[0].properties.privateIPAddress]', ':2181/nerve -s neo4j:neo4j:/neo4j')]",
                         "ports": [
                             "7474:7474",
                             "7473:7473",
