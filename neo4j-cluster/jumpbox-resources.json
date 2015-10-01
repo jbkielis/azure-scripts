@@ -248,7 +248,7 @@
                         "image": "jbkielis/docker-synapse",
                         "restart": "always",
                         //
-                        "command": "[concat('-d zk://', '[reference('jumpboxNIC').ipConfigurations[0].properties.privateIPAddress]', ':2181/nerve -s neo4j:neo4j:/neo4j')]",
+                        "command": "[concat('-d zk://', '[reference(resourceId('Microsoft.Network/networkInterfaces', 'jumpboxNIC'),providers('Microsoft.Network', 'networkInterfaces').ipConfigurations[0]).privateIPAddress]', ':2181/nerve -s neo4j:neo4j:/neo4j')]",
                         "ports": [
                             "7474:7474",
                             "7473:7473",
